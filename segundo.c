@@ -5,8 +5,11 @@ char imprimirMenu();
 float leerNumeroProducto(char producto[], float precio);
 
 float preciof(float subtotal);
+float totalprod(float num,float precio1);
 
 char select1;
+float num, subtotal;
+prod1;
 
 int main(void)
 
@@ -50,25 +53,29 @@ int main(void)
 
                 case 'a':
                     subta = leerNumeroProducto("Llantas", precioa);
+                    totala = totalprod(subta , precioa);
                     break;
 
                 case 'b':
                     subtb = leerNumeroProducto("Pastillas", preciob);
+                    totalb = totalprod(subtb,preciob);
                     break;
 
                 case 'c':
                     subtc = leerNumeroProducto("Kit de embrague", precioc);
+                    totalc = totalprod(subtc,precioc);
                     break;
 
                 case 'd':
 
                     subtd = leerNumeroProducto("Faros", preciod);
-
+                    totald = totalprod(subtd, preciod);
                     break;
 
                 case 'e':
 
                     subte = leerNumeroProducto("Radiadores", precioe);
+                    totale = totalprod(subte,precioe);
                     break;
                 }
 
@@ -83,52 +90,53 @@ int main(void)
             printf("desea imprimir la factura ? presione 1 )\n");
 
             scanf("%i", &fact);
-            if (fact ==1){
-            printf("Ingrese el nombre del cliente\n");
+            if (fact == 1)
+            {
+                printf("Ingrese el nombre del cliente\n");
 
-            fflush(stdin);
+                fflush(stdin);
 
-            scanf("%s", &nombre);
+                scanf("%s", &nombre);
 
-            printf("Ingrese el numero de cedula\n");
+                printf("Ingrese el numero de cedula\n");
 
-            fflush(stdin);
+                fflush(stdin);
 
-            scanf("%s", &cedula);
+                scanf("%s", &cedula);
 
-            printf("---------------Factura--------------\n");
+                printf("---------------Factura--------------\n");
 
-            printf("Nombre del cliente: %s\n", nombre);
+                printf("Nombre del cliente: %s\n", nombre);
 
-            printf("Cedula del cliente: %s\n", cedula);
+                printf("Cedula del cliente: %s\n", cedula);
 
-            printf("Producto\t\tCantidad\t\tSubtotal\n");
+                printf("Producto\t\tCantidad\t\tSubtotal\n");
 
-            if (subta > 0)
+                if (subta > 0)
 
-                printf("Llantas\t\t%.2f.\t\t%.2f\n", totala, subta);
+                    printf("Llantas\t\t%.2f.\t\t%.2f\n", totala, subta);
 
-            if (subtb > 0)
+                if (subtb > 0)
 
-                printf("Pastillas Freno\t\t%.2f\t\t%.2f\n", totalb, subtb);
+                    printf("Pastillas Freno\t\t%.2f\t\t%.2f\n", totalb, subtb);
 
-            if (subtc > 0)
+                if (subtc > 0)
 
-                printf("Embrague\t\t%.2f\t\t%.2f\n", totalc, subtc);
+                    printf("Embrague\t\t%.2f\t\t%.2f\n", totalc, subtc);
 
-            if (subtd > 0)
+                if (subtd > 0)
 
-                printf("Faro\t\t%.2f\t\t%.2f\n", totald, subtd);
+                    printf("Faro\t\t%.2f\t\t%.2f\n", totald, subtd);
 
-            if (subte > 0)
+                if (subte > 0)
 
-                printf("Radiador\t\t%.2f\t\t%.2f\n", totale, subte);
+                    printf("Radiador\t\t%.2f\t\t%.2f\n", totale, subte);
 
-            printf("Sub total\t%.2f\n", subtotal);
+                printf("Sub total\t%.2f\n", subtotal);
 
-            printf("Sub total con descuento\t%.2f\n", subtotaldes);
+                printf("Sub total con descuento\t%.2f\n", subtotaldes);
 
-            printf("Total\t%.2f\n", total);
+                printf("Total\t%.2f\n", total);
             }
 
             break;
@@ -180,7 +188,7 @@ float leerNumeroProducto(char producto[], float precio)
 
 {
     int resp;
-    float num, subtotal, totala;
+
     do
     {
 
@@ -189,9 +197,9 @@ float leerNumeroProducto(char producto[], float precio)
         fflush(stdin);
 
         scanf("%f", &num);
-        totala = totala + num;
+        prod1 = prod1 + num;
 
-        subtotal = totala * precio;
+        subtotal = prod1 * precio;
         printf("desea ingresar otro producto? (presione 1 para ingresar nuevos datos o cualquier numero para salir) ");
 
         fflush(stdin);
@@ -229,4 +237,10 @@ float preciof(float subtotal)
 
     totalf = subtotaldes * 1.12;
     return totalf;
+}
+float totalprod(float num,float precio1)
+{
+
+    prod1= num/precio1;
+    return prod1;
 }
