@@ -134,7 +134,7 @@ int main(void)
 
                 printf("Sub total\t%.2f\n", subtotal);
 
-                printf("Sub total con descuento\t%.2f\n", subtotaldes);
+                printf("Sub total con descuento\t%.2f\n", total/1.12);
 
                 printf("Total\t%.2f\n", total);
             }
