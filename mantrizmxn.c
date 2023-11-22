@@ -1,8 +1,6 @@
-#include <stdio.h>
+    #include <stdio.h>
 #include <math.h>
 #include <string.h>
-char distancia[10];
-
 int main(void)
 {
     int i1, i2, j1, j2,i3,j3;
@@ -19,6 +17,8 @@ int main(void)
     int resultado[i3][j3];
     if (j1==i2)
     {
+    i3=i1;
+    j3=j2;
     for (int i = 0; i < i1; i++)
     {
     for (int j = 0; i < j1; j++)
