@@ -86,7 +86,7 @@ int main()
             printf(" id: \t");
             for (int i = 0; i < productCount; i++)
             {
-                printf(" %s \t", id[i]);
+                printf("\t %s \t\t", id[i]);
             }
             printf("\n medicamentos: ");
             for (int i = 0; i < productCount; i++)
@@ -96,13 +96,13 @@ int main()
             printf("\n precios: \t");
             for (int i = 0; i < productCount; i++)
             {
-                printf(" %.2f$ \t", price[i]);
+                printf(" \t%.2f$ \t\t", price[i]);
             }
             printf(" \t");
             printf("\n cantidad: \t");
             for (int i = 0; i < productCount; i++)
             {
-                printf(" %.2f \t", quantity[i]);
+                printf(" \t%.2f \t\t", quantity[i]);
             }
 
             break;
@@ -132,6 +132,7 @@ int main()
                     {
                         do
                         {
+                            quantity[i] = quantity[i] + cantidad;
                             printf("No existen suficente stock");
                             printf("Ingrese la cantidad de %s que deseas adquirir (quedan %.2f disponibles)\n ", name[i], quantity[i]);
                             scanf("%f", &cantidad);
