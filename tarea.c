@@ -124,7 +124,7 @@ int main()
                 if ((strcmp(id[i], Id2) == 0))
                 {
                     found = 1;
-                    printf("Ingrese la cantidad de %s que deseas adquirir (quedan %f disponibles) \n", name[i], quantity[i]);
+                    printf("Ingrese la cantidad de %s que deseas adquirir (quedan %.2f disponibles) \n", name[i], quantity[i]);
                     scanf("%f", &cantidad);
 
                     quantity[i] = quantity[i] - cantidad;
@@ -133,14 +133,14 @@ int main()
                         do
                         {
                             printf("No existen suficente stock");
-                            printf("Ingrese la cantidad de %s que deseas adquirir (quedan %f disponibles)\n ", name[i], quantity[i]);
+                            printf("Ingrese la cantidad de %s que deseas adquirir (quedan %.2f disponibles)\n ", name[i], quantity[i]);
                             scanf("%f", &cantidad);
                             quantity[i] = quantity[i] - cantidad;
                         } while (quantity[i] < 0);
                     }
                     total = price[i] * cantidad;
-                    printf(" debes pagar %f $ por  %f  de %s \n ", total, cantidad, name[i]);
-                    printf("stock restante %f:\n ", quantity[i]);
+                    printf(" debes pagar %.2f $ por  %.2f  de %s \n ", total, cantidad, name[i]);
+                    printf("stock restante %.2f:\n ", quantity[i]);
                 }
             }
             if (found == 0)
