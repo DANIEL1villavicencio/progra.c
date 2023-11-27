@@ -29,13 +29,13 @@ int main()
             if (productCount < productos)
             {
                 printf("Ingrese detalles del producto:\n");
-                printf("ID: ");
-                scanf("%d", &id[productCount]);
-                printf("Nombre: ");
+                printf("ID:\n ");
+                scanf("%s", &id[productCount]);
+                printf("Nombre: \n");
                 scanf("%s", &name[productCount]);
-                printf("Precio: ");
+                printf("Precio:\n ");
                 scanf("%f", &price[productCount]);
-                printf("Cantidad: ");
+                printf("Cantidad: \n");
                 scanf("%f", &quantity[productCount]);
                 productCount++;
             }
@@ -96,13 +96,13 @@ int main()
             printf("\n precios: \t");
             for (int i = 0; i < productCount; i++)
             {
-                printf(" %f$ \t", price[i]);
+                printf(" %.2f$ \t", price[i]);
             }
             printf(" \t");
             printf("\n cantidad: \t");
             for (int i = 0; i < productCount; i++)
             {
-                printf(" %f \t", quantity[i]);
+                printf(" %.2f \t", quantity[i]);
             }
 
             break;
