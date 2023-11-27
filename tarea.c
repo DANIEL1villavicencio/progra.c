@@ -10,7 +10,7 @@ int main()
     char name[100][50] = {"Ibuprofeno", "Meloxicam", "Clonazepam", "Mebucaina ", "Lemonflu", "Aspirina", "Paracetamol"};
     float price[100] = {6.50, 4.40, 3.25, 4.00, 2.30, 1.75, 3.50};
     float quantity[100] = {60, 55, 40, 56, 30, 70, 80};
-    int choice;
+    int choice, casos;
     char removeId[50], Id2[50];
     float total, cantidad;
     do
@@ -19,7 +19,8 @@ int main()
         printf("2. Quitar producto\n");
         printf("3. Mostrar inventario\n");
         printf("4. calcular precio del producto\n");
-        printf("5. Salir\n");
+        printf("5.quitar o agregar stock\n");
+        printf("6. Salir\n");
         printf("Ingrese su eleccion: ");
         scanf("%d", &choice);
 
@@ -91,7 +92,7 @@ int main()
             printf("\n medicamentos: ");
             for (int i = 0; i < productCount; i++)
             {
-                printf("%s \t", name[i]);
+                printf("\t %s \t", name[i]);
             }
             printf("\n precios: \t");
             for (int i = 0; i < productCount; i++)
@@ -112,7 +113,6 @@ int main()
             for (int i = 0; i < productCount; i++)
             {
                 printf(" %s \t %s\n", id[i], name[i]);
-           
             }
             printf("Ingrese el ID del producto a comprar: \n");
 
@@ -150,12 +150,101 @@ int main()
             }
             break;
         case 5:
+            do
+            {
+                int found = 0;
+
+                printf("presione 1 para renovar o 2 para quitar o 3 para salir \n");
+
+                scanf("%d", &casos);
+
+                switch (casos)
+                {
+                case 1:
+                    getchar();
+                    printf(" id \t medicamentos\n");
+                    for (int i = 0; i < productCount; i++)
+                    {
+                        printf(" %s \t %s\n", id[i], name[i]);
+                    }
+                    printf("Ingrese el ID del producto a modificar stock: \n");
+
+                    scanf("%s", &Id2);
+                    for (int i = 0; i < productCount; ++i)
+                    {
+                        if ((strcmp(id[i], Id2) == 0))
+                        {
+                            found = 1;
+                            printf("Ingrese la cantidad de %s que deseas renovar (quedan %.2f disponibles) \n", name[i], quantity[i]);
+                            scanf("%f", &cantidad);
+
+                            quantity[i] = quantity[i] + cantidad;
+
+                            printf("stock renovado %.2f:\n ", quantity[i]);
+                        }
+                    }
+                    if (found == 0)
+                    {
+                        printf("Producto no encontrado.\n");
+                    }
+
+                    break;
+                case 2:
+                    getchar();
+                    printf(" id \t medicamentos\n");
+                    for (int i = 0; i < productCount; i++)
+                    {
+                        printf(" %s \t %s\n", id[i], name[i]);
+                    }
+                    printf("Ingrese el ID del producto a modificar stock: \n");
+
+                    scanf("%s", &Id2);
+                    for (int i = 0; i < productCount; ++i)
+                    {
+                        if ((strcmp(id[i], Id2) == 0))
+                        {
+                            found = 1;
+                            printf("Ingrese la cantidad de %s que deseas quitar (quedan %.2f disponibles) \n", name[i], quantity[i]);
+                            scanf("%f", &cantidad);
+
+                            quantity[i] = quantity[i] - cantidad;
+                            if (quantity[i] < 0)
+                            {
+                                do
+                                {
+                                    quantity[i] = quantity[i] + cantidad;
+                                    printf("No existen suficente stock");
+                                    printf("Ingrese la cantidad de %s que deseas adquirir (quedan %.2f disponibles)\n ", name[i], quantity[i]);
+                                    scanf("%f", &cantidad);
+                                    quantity[i] = quantity[i] - cantidad;
+                                } while (quantity[i] < 0);
+                            }
+                            printf("stock restante %.2f:\n ", quantity[i]);
+                        }
+                    }
+                    if (found == 0)
+                    {
+                        printf("Producto no encontrado.\n");
+                    }
+
+                    break;
+                case 3:
+                    printf("salir.\n");
+                    break;
+                default:
+                    printf("opcion invalida.\n");
+                    break;
+                }
+            } while (casos != 3);
+            break;
+
+        case 6:
             printf("Saliendo del programa.\n");
             break;
         default:
             printf("Opción no válida. Inténtelo de nuevo.\n");
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
