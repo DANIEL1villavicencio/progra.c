@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#define productos 100
-
 int main()
 {
     int productCount = 7;
@@ -15,12 +10,14 @@ int main()
     float total, cantidad;
     do
     {
+        printf("\n interfaz stock Fybeca granados:\n");
         printf("\n1. Agregar producto\n");
         printf("2. Quitar producto\n");
         printf("3. Mostrar inventario\n");
         printf("4. calcular precio del producto\n");
         printf("5.quitar o agregar stock\n");
-        printf("6. Salir\n");
+        printf("6. editar item\n");
+        printf("7. Salir\n");
         printf("Ingrese su eleccion: ");
         scanf("%d", &choice);
 
@@ -39,6 +36,7 @@ int main()
                 printf("Cantidad: \n");
                 scanf("%f", &quantity[productCount]);
                 productCount++;
+                printf("El producto %s ha sido ingresado exitosamente\n", id[productCount]);
             }
             else
             {
@@ -237,14 +235,51 @@ int main()
                 }
             } while (casos != 3);
             break;
-
         case 6:
+            if (productCount > 0)
+            {
+                getchar();
+                printf("Ingrese el ID a editar:\n ");
+                scanf("%s", &removeId);
+
+                int found = 0;
+                for (int i = 0; i < productCount; ++i)
+                {
+                    if ((strcmp(id[i], removeId) == 0))
+                    {
+                        found = 1;
+                        printf("Ingrese detalles del producto:\n");
+                        printf("nuevo ID (viejo id: %s) \n ", id[i]);
+                        scanf("%s", &id[i]);
+                        printf("nuevo nombre (viejo nombre: %s) \n ", name[i]);
+                        scanf("%s", &name[i]);
+                        printf("nuevo precio (viejo precio: %.2f) \n ", price[i]);
+                        scanf("%f", &price[i]);
+                        printf("nueva cantidad (vieja cantidad: %.2f) \n ", quantity[i]);
+                        scanf("%f", &quantity[i]);
+                        printf("El producto %s ha sido editadoo exitosamente\n", removeId);
+                        break;
+                    }
+                }
+
+                if (found == 0)
+                {
+                    printf("Producto no encontrado.\n");
+                }
+            }
+            else
+            {
+                printf("El inventario está vacío. No hay productos para editar.\n");
+            }
+            break;
+
+        case 7:
             printf("Saliendo del programa.\n");
             break;
         default:
             printf("Opción no válida. Inténtelo de nuevo.\n");
         }
-    } while (choice != 6);
+    } while (choice != 7);
 
     return 0;
 }
