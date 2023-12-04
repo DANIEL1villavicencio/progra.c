@@ -3,8 +3,8 @@
 #include <math.h>
 #define parqueadero 10
 void caso1(int *lote, char placa[][50], char modelo[][50], char color[][50], float ingresoh[10], float ingresom[10], char estado[][50], char parqueado[50]);
-void caso2(char *placa1, float *salidah, float *minutos, char placa[][50], char modelo[][50], char color[10][50], float ingresoh[10], float ingresom[10], char estado[][50], char parqueado[50], char vacio[50]);
-void caso3(char espacio[10], char placa[][50], char estado[][50]);
+void caso2(char  placa1[50],float *salidah,float *minutos, char placa[][50], char modelo[][50], char color[10][50], float ingresoh[10], float ingresom[10], char estado[][50], char parqueado[50],char vacio[50]);
+void caso3 (int espacio[10], char placa[][50], char estado[][50]);
 int main()
 {
     int choice, lote;
@@ -36,12 +36,12 @@ int main()
             break;
         case 2:
 
-            caso2(&placa1, &salidah, &minutos, placa, modelo, color, ingresoh, ingresom, estado, parqueado, vacio);
+    caso2( placa1, &salidah, &minutos,  placa,  modelo,  color,  ingresoh,  ingresom,  estado,  parqueado, vacio);
 
             break;
 
         case 3:
-            caso3(espacio, placa, estado);
+caso3 ( espacio, placa,estado);
             break;
         case 4:
             printf("Saliendo del programa.\n");
@@ -79,9 +79,9 @@ void caso1(int *lote, char placa[][50], char modelo[][50], char color[10][50], f
 
     printf("vehiculo ingresado con exito ");
 }
-void caso2(char *placa1, float *salidah, float *minutos, char placa[][50], char modelo[][50], char color[10][50], float ingresoh[10], float ingresom[10], char estado[][50], char parqueado[50], char vacio[50])
+void caso2(char  placa1[50],float *salidah,float *minutos, char placa[][50], char modelo[][50], char color[10][50], float ingresoh[10], float ingresom[10], char estado[][50], char parqueado[50],char vacio[50])
 {
-    float mins, total, pagar;
+    float mins,total,pagar;
     getchar();
 
     printf("la placa de su vehiculo ");
@@ -120,22 +120,21 @@ void caso2(char *placa1, float *salidah, float *minutos, char placa[][50], char 
         printf("vehiculo no encontrado.\n");
     }
 }
-void caso3(char espacio[10], char placa[][50], char estado[][50])
-{
-    printf(" espacios: \t");
-    for (int i = 0; i < parqueadero; i++)
-    {
-        printf(" %d \t", espacio[i]);
-    }
-    printf("\n vehiculos: ");
-    for (int i = 0; i < parqueadero; i++)
-    {
-        printf("%s \t", placa[i]);
-    }
-    printf("\n estado: \t");
-    for (int i = 0; i < parqueadero; i++)
-    {
-        printf(" %s \t", estado[i]);
-    }
-    printf(" \t");
+void caso3 (int espacio[10], char placa[][50], char estado[][50]){
+               printf(" espacios: \t");
+            for (int i = 0; i < parqueadero; i++)
+            {
+                printf(" %d \t", espacio[i]);
+            }
+            printf("\n vehiculos: ");
+            for (int i = 0; i < parqueadero; i++)
+            {
+                printf("%s \t", placa[i]);
+            }
+            printf("\n estado: \t");
+            for (int i = 0; i < parqueadero; i++)
+            {
+                printf(" %s \t", estado[i]);
+            }
+            printf(" \t"); 
 }
