@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <math.h>
+void leerPuntos(double puntos[][3], int filas);
 
-double calcularDistancia(double punto1[3], double punto2[3])
-{
+#include <stdio.h>
+#include <math.h>
+
+double calcularDistancia(double punto1[3], double punto2[3]) {
     // Calcula la distancia euclidiana entre dos puntos en 3D
     return sqrt(pow(punto2[0] - punto1[0], 2) + pow(punto2[1] - punto1[1], 2) + pow(punto2[2] - punto1[2], 2));
 }
 
-void encontrarRutaMinima(double puntos[][3], int inicio, int fin, int numPuntos)
-{
-    double distanciaMinima = INFINITY;// no tiene peso xd
+void encontrarRutaMinima(double puntos[][3], int inicio, int fin, int numPuntos) {
+    double distanciaMinima = INFINITY;
     int nodoIntermedio = -1;
 
-    for (int intermedio = inicio + 1; intermedio < fin; ++intermedio)
-    {
+    for (int intermedio = inicio + 1; intermedio < fin; ++intermedio) {
         double distanciaTotal = calcularDistancia(puntos[inicio], puntos[intermedio]) +
                                 calcularDistancia(puntos[intermedio], puntos[fin]);
 
-        if (distanciaTotal < distanciaMinima)
-        {
+        if (distanciaTotal < distanciaMinima) {
             distanciaMinima = distanciaTotal;
             nodoIntermedio = intermedio;
         }
@@ -30,23 +30,34 @@ void encontrarRutaMinima(double puntos[][3], int inicio, int fin, int numPuntos)
     printf("Punto de fin: (%.1f, %.1f, %.1f)\n", puntos[fin][0], puntos[fin][1], puntos[fin][2]);
     printf("Distancia mínima: %.2f\n", distanciaMinima);
 }
-
-int main()
+void leerPuntos(double puntos[][3], int filas)
 {
-    double puntos[][3] = {
-        {0.0, 0.0, 0.0},
-        {1.0, 2.0, 3.0},
-        {4.0, 5.0, 6.0},
-        {7.0, 8.0, 9.0},
-        {10.0, 11.0, 12.0}};
+    for (int i = 0; i < filas; i++)
+    {
+        printf("Ingrese el la coordenadas (x, y,z) de punto %d :", i+1);
+        scanf("%lf,%lf,%lf", &puntos[i][0], &puntos[i][1], &puntos[i][2]);
+    }
+}
 
+
+int main() {
     int inicio;
-    int fin;
-    printf("Ingrese el punto inicial y el punto final : ");
+    int fin ;
+    double puntos[5][3] ;
+    leerPuntos (puntos,5);
+     for (int i = 0; i < 5; i++)
+    {
+        printf("%lf,%lf,%lf", puntos[i][0], puntos[i][1], puntos[i][2]);
+
+    }
+    printf("Ingrese el punto inicial y el punto final (0-4): ");
     scanf("%d %d", &inicio, &fin);
+
+    
     int numPuntos = sizeof(puntos) / sizeof(puntos[0]);
 
     encontrarRutaMinima(puntos, inicio, fin, numPuntos);
 
     return 0;
 }
+
