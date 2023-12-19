@@ -21,6 +21,29 @@ void encontrarRutaMinima(double puntos[][3], int inicio, int fin, int numPuntos)
                 if (intermedio2 != inicio && intermedio2 != fin && intermedio2 != intermedio1)
                 {
                     for (int intermedio3 = 0; intermedio3 < 5; ++intermedio3)
+#include <stdio.h>
+#include <math.h>
+
+double calcularDistancia(double punto1[3], double punto2[3])
+{
+    // Calcula la distancia euclidiana entre dos puntos en 3D
+    return sqrt(pow(punto2[0] - punto1[0], 2) + pow(punto2[1] - punto1[1], 2) + pow(punto2[2] - punto1[2], 2));
+}
+
+void encontrarRutaMinima(double puntos[][3], int inicio, int fin)
+{
+    double distanciaMinima = INFINITY;
+    int nodosIntermedios[3] = {-1, -1, -1};
+
+    for (int intermedio1 = 0; intermedio1 < 5; ++intermedio1)
+    {
+        if (intermedio1 != inicio && intermedio1 != fin)
+        {
+            for (int intermedio2 = 0; intermedio2 < 5; ++intermedio2)
+            {
+                if (intermedio2 != inicio && intermedio2 != fin && intermedio2 != intermedio1)
+                {
+                    for (int intermedio3 = 0; intermedio3 < 5; ++intermedio3)
                     {
                         if (intermedio3 != inicio && intermedio3 != fin && intermedio3 != intermedio1 && intermedio3 != intermedio2)
                         {
@@ -64,13 +87,14 @@ int main()
     int inicio, fin;
     double puntos[5][3];
     leerPuntos(puntos, 5);
+  do
+    {
+        printf("Ingrese el punto inicial y el punto final (0-4): ");
+        scanf("%d %d", &inicio, &fin);
 
-    printf("Ingrese el punto inicial y el punto final (0-4): ");
-    scanf("%d %d", &inicio, &fin);
-
-    int numPuntos = sizeof(puntos) / sizeof(puntos[0]);
-
-    encontrarRutaMinima(puntos, inicio, fin, numPuntos);
+        encontrarRutaMinima(puntos, inicio, fin);
+    } while (inicio != 6);
 
     return 0;
 }
+
