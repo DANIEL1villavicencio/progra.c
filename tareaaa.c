@@ -9,7 +9,7 @@ int main()
 
     do
     {
-        printf("presione 1 para crear el archivo producto\n 2 para buscar un producto \n 3 para agregar un producto\n 4 para editar\n 5 para borrar\n 6 para salir\n");
+        printf("presione 1 para crear el archivo producto\n 2 para buscar un producto \n 3 para agregar un producto\n 4 para editar\n 5 para borrar\n 6 para renovar Stock\n 7 para salir\n");
         scanf("%d", &menu);
 
         switch (menu)
@@ -29,12 +29,14 @@ int main()
         case 5:
             Borrar();
             break;
-
+        case 6:
+           Stock();
+            break;
         default:
             printf("no existe esa opcion\n");
             break;
         }
-    } while (menu != 6);
+    } while (menu != 7);
 
     return 0;
 }
@@ -44,7 +46,7 @@ void Buscar();
 void Agregar();
 void Editar();
 void Borrar();
-
+void Stock();
 
 
 
@@ -121,6 +123,7 @@ void Editar()
     scanf("%s", &productoEditar);
     while (feof(archivo) == 0)
     {
+        editar = 0;
         fscanf(archivo, "%s %d \n", &producto, &cantidad);
         if (strcmp(producto, productoEditar) == 0)
         {
@@ -134,7 +137,7 @@ void Editar()
         {
             fprintf(archivoSalida, "%s %d\n", producto, cantidad);
         }
-        editar = 0;
+        
     }
     fclose(archivo);
     fclose(archivoSalida);
@@ -175,4 +178,48 @@ void Borrar()
 
     printf("producto eliminado con éxito.\n");
 }
+void Stock() {
+            FILE *archivo, *archivoSalida;
 
+            char productoEditar[50];
+            int editar = 0;
+            int cantidad;
+            char producto[50];
+            char productoNuevo[50];
+            int cantidadNuevo, cantidadTotal;
+            archivo = fopen("archivo1", "r+");
+            archivoSalida = fopen("Archivo", "w+");
+            printf("Ingrese el producto a editar: ");
+            scanf("%s", &productoEditar);
+            while (feof(archivo) == 0)
+            {
+                editar = 0;
+                fscanf(archivo, "%s %d \n", &producto, &cantidad);
+                if (strcmp(producto, productoEditar) == 0)
+                {
+                    do
+                    {
+                        printf("Ingrese la nueva cantidad del producto, existeb %d todavia: ", cantidad);
+                        scanf("%d", &cantidadNuevo);
+                        cantidadTotal = cantidadNuevo + cantidad;
+                        if (cantidadTotal < 0)
+                        {
+                            printf("no es posible ingresar cantidades negativas ");
+                        }
+                    } while (cantidadTotal < 0);
+
+                    fprintf(archivoSalida, "%s %d \n", producto, cantidadTotal);
+                    editar = 1;
+                    continue;
+                }
+                if (!editar)
+                {
+                    fprintf(archivoSalida, "%s %d\n", producto, cantidad);
+                }
+            }
+            fclose(archivo);
+            fclose(archivoSalida);
+            remove("archivo1");
+            rename("Archivo", "archivo1");
+            printf("stock nuevo establecido con éxito.\n");
+        }
