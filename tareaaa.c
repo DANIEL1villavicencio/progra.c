@@ -5,31 +5,36 @@ int main()
 {
     int menu;
     char nombreProducto[10][50] = {"queso", "tomates", "yogurt", "papas", "carne", "pollo", "leche", "huevos", "aguacate", "pan"};
-    int cantidadProducto[10] = {5, 6, 2, 7, 9, 1, 22, 45, 7, 9};
+    int cantidadProducto[10] = {5, 6, 2, 7, 9, 1, 22, 45, 7, 69};
 
-    Mostrar(nombreProducto, cantidadProducto);
-    printf("presione 1 para buscar un producto \n 2 para agregar un producto\n 3 para borrar\n, 4 para salir\n");
-    scanf("%d", &menu);
     do
     {
+        printf("presione 1 para crear el archivo producto\n 2 para buscar un producto \n 3 para agregar un producto\n 4 para editar\n 5 para borrar\n 6 para salir\n");
+        scanf("%d", &menu);
+
         switch (menu)
         {
-
         case 1:
-            Buscar();
+            Mostrar(nombreProducto, cantidadProducto);
             break;
         case 2:
-            Agregar();
+            Buscar();
             break;
         case 3:
-            Borrar(nombreProducto, cantidadProducto);
+            Agregar();
+            break;
+        case 4:
+           Editar();
+            break;
+        case 5:
+            Borrar();
             break;
 
         default:
             printf("no existe esa opcion\n");
             break;
         }
-    } while (menu == 4);
+    } while (menu != 6);
 
     return 0;
 }
@@ -37,7 +42,9 @@ int main()
 void Mostrar(char nombreProducto[10][50], int cantidadProducto[10]);
 void Buscar();
 void Agregar();
-void Borrar(char nombreProducto[10][50], int cantidadProducto[10]);
+void Editar();
+void Borrar();
+
 
 
 
@@ -58,6 +65,7 @@ void Mostrar(char nombreProducto[10][50], int cantidadProducto[10])
         fprintf(archivo, "%s %d \n", nombreProducto[i], cantidadProducto[i]);
     }
     fclose(archivo);
+    return;
 }
 
 void Buscar()
@@ -79,7 +87,7 @@ void Buscar()
         fscanf(archivo, "%s %d", &producto, &cantidad);
         if (strcmp(producto, productoBuscar) == 0)
         {
-            printf("la cantidad de papas es %d", cantidad);
+            printf("la cantidad de %s es %d \n", producto, cantidad);
         }
     }
     fclose(archivo);
@@ -95,31 +103,76 @@ void Agregar()
     scanf("%s %d", &nuevoProd, &nuevoCant);
     fprintf(archivo, "%s %d ", nuevoProd, nuevoCant);
     fclose(archivo);
+    printf("producto ingresado con exito \n");
 }
-void Borrar(char nombreProducto[10][50], int cantidadProducto[10])
+void Editar()
 {
-    FILE *archivo;
+    FILE *archivo, *archivoSalida;
 
-    archivo = fopen("archivo1", "w+");
-    char productoBuscar[50];
-    printf("ingrese el nombre del producto a borrar\n");
-    scanf("%s", &productoBuscar);
-    if (archivo == NULL)
-    {
-        printf("no se puede abrir\n");
-    }
+    char productoEditar[50];
+    int editar = 0;
+    int cantidad;
     char producto[50];
+    char productoNuevo[50];
+    int cantidadNuevo;
+    archivo = fopen("archivo1", "r+");
+    archivoSalida = fopen("Archivo", "w+");
+    printf("Ingrese el producto a editar: ");
+    scanf("%s", &productoEditar);
     while (feof(archivo) == 0)
     {
-        fscanf(archivo, "%s", &producto);
-
-        for (int i = 0; i < 10; i++)
+        fscanf(archivo, "%s %d \n", &producto, &cantidad);
+        if (strcmp(producto, productoEditar) == 0)
         {
-            if (strcmp(producto, productoBuscar) == 0)
-            {
-                fprintf(archivo, "%s %d \n", nombreProducto[i], cantidadProducto[i]);
-            }
+            printf("Ingrese el nuevo nombre y la nueva cantidad del producto: ");
+            scanf("%s %d", &productoNuevo, &cantidadNuevo);
+            fprintf(archivoSalida, "%s %d \n", productoNuevo, cantidadNuevo);
+            editar = 1;
+            continue;
+        }
+        if (!editar)
+        {
+            fprintf(archivoSalida, "%s %d\n", producto, cantidad);
+        }
+        editar = 0;
+    }
+    fclose(archivo);
+    fclose(archivoSalida);
+    remove("archivo1");
+    rename("Archivo", "archivo1");
+    printf("producto editado con éxito.\n");
+}
+
+void Borrar()
+{
+    FILE *archivo, *archivoSalida;
+    char productoBorrar[50];
+    int borrar = 0;
+    int cantidad;
+    char producto[50];
+    archivo = fopen("archivo1", "r+");
+    archivoSalida = fopen("Archivo", "w+");
+    printf("Ingrese el producto a eliminar: ");
+    scanf("%s", &productoBorrar);
+    while (feof(archivo) == 0)
+    {
+        borrar = 0;
+        fscanf(archivo, "%s %d \n", &producto, &cantidad);
+        if (strcmp(producto, productoBorrar) == 0)
+        {
+            borrar = 1;
+            continue;
+        }
+        if (!borrar)
+        {
+            fprintf(archivoSalida, "%s %d \n", producto, cantidad);
         }
     }
     fclose(archivo);
+    fclose(archivoSalida);
+    remove("archivo1");
+    rename("Archivo", "archivo1");
+
+    printf("producto eliminado con éxito.\n");
 }
+
