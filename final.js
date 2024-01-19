@@ -18,19 +18,19 @@ do {
 
     switch (choice) {
         case 1:
-            Agregar(productos,id,Name,price,quantity);
+            Agregar();
             break;
         case 2:
-            Quitar(id,Name,price,quantity,total,cantidad);
+            Quitar();
             break;
         case 3:
-            Mostrar(id,Name,price,quantity);
+            Mostrar();
             break;
         case 4:
-            Precio(id,Name,price,quantity,total,cantidad);
+            Precio();
             break;
         case 5:
-            Stock(id,Name,quantity,cantidad);
+            Stock();
             break;
 
         case 6:
@@ -41,7 +41,7 @@ do {
     }
 } while (choice != 6); 
 
-function Agregar(productos,id,Name,price,quantity) {
+function Agregar() {
     if (id.length < productos) {
         console.log(`Ingrese detalles del producto:`);
         console.log(`ID:`);
@@ -58,7 +58,7 @@ function Agregar(productos,id,Name,price,quantity) {
     }
 }
 
-function Quitar(id,Name,price,quantity) {
+function Quitar() {
     if (id.length > 0) {
         console.log("Ingrese el ID del producto a quitar:\n ");
         let removeId = prompt("") || "";
@@ -66,13 +66,10 @@ function Quitar(id,Name,price,quantity) {
         for (let i = 0; i < id.length; ++i) {
             if (id[i] === removeId) {
                 found = true;
-                // Mover los productos restantes hacia atrás en el array
-                for (let j = i; j < id.length - 1; ++j) {
-                    id[j] = id[j + 1];
-                    Name[j] = Name[j + 1];
-                    price[j] = price[j + 1];
-                    quantity[j] = quantity[j + 1];
-                }
+                splice.id[i,1];
+                splice.Name[i,1];
+                splice.price[i,1];
+                splice.quantity[i,1];
                 console.log("Producto eliminado exitosamente.\n");
                 break;
             }
@@ -86,7 +83,7 @@ function Quitar(id,Name,price,quantity) {
         console.log("El inventario está vacío. No hay productos para quitar.\n");
     }
 }
-function Mostrar(id,Name,price,quantity) {
+function Mostrar() {
 
     console.log(" id: \t medicamentos:\t precios:\t cantidad:\t ");
     for (let i = 0; i < id.length; i++) {
@@ -94,7 +91,7 @@ function Mostrar(id,Name,price,quantity) {
     }
 }
 
-function Precio(id,Name,price,quantity,total,cantidad) {
+function Precio() {
 
     console.log(" id \t medicamentos\n");
     for (let i = 0; i < id.length; i++) {
@@ -131,7 +128,7 @@ function Precio(id,Name,price,quantity,total,cantidad) {
     }
 }
 
-function Stock(id,Name,quantity,cantidad) {
+function Stock() {
     do {
         let found = false;
 
@@ -173,7 +170,6 @@ function Stock(id,Name,quantity,cantidad) {
                 for (let i = 0; i < id.length; ++i) {
                     if (id[i] === Id2) {
                         found = true;
-                        console.log("Ingrese la cantidad de ", Name[i], " que deseas adquirir (quedan ", quantity[i], " disponibles)");
                         console.log(`Ingrese la cantidad de ${Name[i]} que deseas quitar (quedan ${quantity[i]} disponibles)`);
                         cantidad = parseFloat(prompt("") || "0");
 
