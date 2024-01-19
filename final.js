@@ -5,7 +5,7 @@ let price = [6.50, 4.40, 3.25, 4.00, 2.30, 1.75, 3.50];
 let quantity = [60, 55, 40, 56, 30, 70, 80];
 let choice, casos;
 let total, cantidad;
-const prompt = require(`prompt-sync` )();
+const prompt = require(`prompt-sync`)();
 do {
     console.log("\n1. Agregar producto\n");
     console.log("2. Quitar producto\n");
@@ -39,7 +39,7 @@ do {
         default:
             console.log("Opción no válida. Inténtelo de nuevo.\n");
     }
-} while (choice != 6); 
+} while (choice != 6);
 
 function Agregar() {
     if (id.length < productos) {
@@ -66,10 +66,10 @@ function Quitar() {
         for (let i = 0; i < id.length; ++i) {
             if (id[i] === removeId) {
                 found = true;
-                splice.id[i,1];
-                splice.Name[i,1];
-                splice.price[i,1];
-                splice.quantity[i,1];
+                splice.id[i, 1];
+                splice.Name[i, 1];
+                splice.price[i, 1];
+                splice.quantity[i, 1];
                 console.log("Producto eliminado exitosamente.\n");
                 break;
             }
@@ -87,7 +87,7 @@ function Mostrar() {
 
     console.log(" id: \t medicamentos:\t precios:\t cantidad:\t ");
     for (let i = 0; i < id.length; i++) {
-        console.log( `${id[i]} \t ${Name[i]} \t${price[i]} \t ${quantity[i]}"\t`);
+        console.log(`${id[i]} \t ${Name[i]} \t${price[i]} \t ${quantity[i]}"\t`);
     }
 }
 
@@ -95,7 +95,7 @@ function Precio() {
 
     console.log(" id \t medicamentos\n");
     for (let i = 0; i < id.length; i++) {
-        console.log(" %s \t %s\n", id[i], Name[i]);
+        console.log(id[i], "\t", Name[i]);
     }
     console.log("Ingrese el ID del producto a comprar: \n");
 
@@ -119,8 +119,8 @@ function Precio() {
                 } while (quantity[i] < 0);
             }
             total = price[i] * cantidad;
-            console.log(" debes pagar %.2f $ por  %.2f  de %s \n ", total, cantidad, Name[i]);
-            console.log("stock restante %.2f:\n ", quantity[i]);
+            console.log(` debes pagar ${total[i]} $ por  ${cantidad[i]}  de ${Name[i]} \n `);
+            console.log(`stock restante ${quantity[i]}:\n `);
         }
     }
     if (!found) {
