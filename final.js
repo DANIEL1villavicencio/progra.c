@@ -131,7 +131,7 @@ function Precio() {
 function Stock() {
     do {
         let found = false;
-
+        let Id2 ;
         console.log("Presione 1 para renovar, 2 para quitar o 3 para salir");
         casos = parseInt(prompt("") || "0");
 
@@ -165,7 +165,7 @@ function Stock() {
                     console.log(id[i] + "\t" + Name[i]);
                 }
                 console.log("Ingrese el ID del producto a modificar stock:");
-                Id2 = prompt("") || "";
+                 Id2 = prompt("") || "";
 
                 for (let i = 0; i < id.length; ++i) {
                     if (id[i] === Id2) {
