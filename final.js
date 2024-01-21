@@ -44,14 +44,10 @@ do {
 function Agregar() {
     if (id.length < productos) {
         console.log(`Ingrese detalles del producto:`);
-        console.log(`ID:`);
-        id[id.length] = prompt("") || "";
-        console.log("Nombre:");
-        Name[id.length] = prompt("") || "";
-        console.log("Precio:");
-        price[id.length] = parseFloat(prompt("") || "0");
-        console.log("Cantidad:");
-        quantity[id.length] = parseFloat(prompt("") || "0");
+        id[id.length] = prompt("ID:") || "";
+        Name[Name.length] = prompt("Nombre") || "";
+        price[price.length] = parseFloat(prompt("Precio:") || "0");
+        quantity[quantity.length] = parseFloat(prompt("Cantidad:") || "0");
     }
     else {
         console.log("El inventario está lleno. No se pueden agregar más productos.\n");
