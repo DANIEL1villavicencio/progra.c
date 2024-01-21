@@ -62,10 +62,10 @@ function Quitar() {
         for (let i = 0; i < id.length; ++i) {
             if (id[i] === removeId) {
                 found = true;
-                splice.id[i, 1];
-                splice.Name[i, 1];
-                splice.price[i, 1];
-                splice.quantity[i, 1];
+                id.splice[i, 1];
+                Name.splice[i, 1];
+                price.splice[i, 1];
+                quantity.splice[i, 1];
                 console.log("Producto eliminado exitosamente.\n");
                 break;
             }
